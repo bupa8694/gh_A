@@ -1,0 +1,20 @@
+name: OneDrive Upload
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Upload file to OneDrive
+        run: |
+          curl -X PUT -T path/to/gh_A.7z \
+            -H "Authorization: Bearer $(curl -s -X POST -d "client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&grant_type=password&scope=Files.ReadWrite.All&username=$macxfadz@hotmail.com&password="JavaMaya@4785" https://login.microsoftonline.com/common/oauth2/v2.0/token | jq -r .access_token)" \
+            "https://graph.microsoft.com/v1.0/me/drive/root:/repo/gh_A.7z:/content"
