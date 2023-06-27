@@ -1,6 +1,6 @@
-
-# Created by https://www.toptal.com/developers/gitignore/api/pvs,visualstudio,visualstudiocode,c++,xcode,git,gitbook,clion,jetbrains,jetbrains+all,macos,windows,linux,premake-gmake,cmake
-# Edit at https://www.toptal.com/developers/gitignore?templates=pvs,visualstudio,visualstudiocode,c++,xcode,git,gitbook,clion,jetbrains,jetbrains+all,macos,windows,linux,premake-gmake,cmake
+# File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
+# Created by https://www.toptal.com/developers/gitignore/api/xcode,windows,visualstudiocode,visualstudio,pvs,premake-gmake,macos,linux,jetbrains+all,jetbrains,gitbook,git,cmake,clion,c++,ninja
+# Edit at https://www.toptal.com/developers/gitignore?templates=xcode,windows,visualstudiocode,visualstudio,pvs,premake-gmake,macos,linux,jetbrains+all,jetbrains,gitbook,git,cmake,clion,c++,ninja
 
 ### C++ ###
 # Prerequisites
@@ -379,6 +379,10 @@ Temporary Items
 ### macOS Patch ###
 # iCloud generated files
 *.icloud
+
+### Ninja ###
+.ninja_deps
+.ninja_log
 
 ### premake-gmake ###
 *.make
@@ -849,5 +853,48 @@ FodyWeavers.xsd
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
-# End of https://www.toptal.com/developers/gitignore/api/pvs,visualstudio,visualstudiocode,c++,xcode,git,gitbook,clion,jetbrains,jetbrains+all,macos,windows,linux,premake-gmake,cmake
+# End of https://www.toptal.com/developers/gitignore/api/xcode,windows,visualstudiocode,visualstudio,pvs,premake-gmake,macos,linux,jetbrains+all,jetbrains,gitbook,git,cmake,clion,c++,ninja
+
+# Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
+
+build/build.ninja
+build/CPackConfig.cmake
+build/CPackSourceConfig.cmake
+build/DartConfiguration.tcl
+build/.cmake/api/v1/query/client-vscode/query.json
+build/.cmake/api/v1/reply/cache-v2-5e1f816a053ab6942251.json
+build/.cmake/api/v1/reply/cmakeFiles-v1-af5c99525b7aad82dbde.json
+build/.cmake/api/v1/reply/codemodel-v2-e4a0a85b96efb83e3f0e.json
+build/.cmake/api/v1/reply/directory-.-Debug-d0094a50bb2071803777.json
+build/.cmake/api/v1/reply/index-2023-06-27T00-34-07-0050.json
+build/.cmake/api/v1/reply/target-Continuous-Debug-9e0d5b9da4fb6d3cbd81.json
+build/.cmake/api/v1/reply/target-ContinuousBuild-Debug-1339bb26f28cf2f9de71.json
+build/.cmake/api/v1/reply/target-ContinuousConfigure-Debug-37c0e00b8aef2174a888.json
+build/.cmake/api/v1/reply/target-ContinuousCoverage-Debug-96799b57023ca7cdd24f.json
+build/.cmake/api/v1/reply/target-ContinuousMemCheck-Debug-592a34230e4ca0d24cdb.json
+build/.cmake/api/v1/reply/target-ContinuousStart-Debug-bf956c9450c904937de8.json
+build/.cmake/api/v1/reply/target-ContinuousSubmit-Debug-b41bff460d43ffcb263d.json
+build/.cmake/api/v1/reply/target-ContinuousTest-Debug-17b162e9355850ec6d26.json
+build/.cmake/api/v1/reply/target-ContinuousUpdate-Debug-264dd8da9c7b2ec82bd2.json
+build/.cmake/api/v1/reply/target-Experimental-Debug-c57b4e70f5237d4b13b4.json
+build/.cmake/api/v1/reply/target-ExperimentalBuild-Debug-26bd6c79b384c7ea3e7f.json
+build/.cmake/api/v1/reply/target-ExperimentalConfigure-Debug-767df019faf2b1157cf0.json
+build/.cmake/api/v1/reply/target-ExperimentalCoverage-Debug-134674845d64507425fd.json
+build/.cmake/api/v1/reply/target-ExperimentalMemCheck-Debug-ccfbce351b898ac66761.json
+build/.cmake/api/v1/reply/target-ExperimentalStart-Debug-cd3a467940b6c1073c18.json
+build/.cmake/api/v1/reply/target-ExperimentalSubmit-Debug-d10456b12000e6ffe112.json
+build/.cmake/api/v1/reply/target-ExperimentalTest-Debug-732f74d4fd3b8dd02807.json
+build/.cmake/api/v1/reply/target-ExperimentalUpdate-Debug-bac7dd30d1d3ec9be905.json
+build/.cmake/api/v1/reply/target-gh_A-Debug-5d883af566f03c6ce1a7.json
+build/.cmake/api/v1/reply/target-Nightly-Debug-b6e013809b28d9e94385.json
+build/.cmake/api/v1/reply/target-NightlyBuild-Debug-bd6cfcc74bd4b26ed666.json
+build/.cmake/api/v1/reply/target-NightlyConfigure-Debug-1e17b624fcb497842c61.json
+build/.cmake/api/v1/reply/target-NightlyCoverage-Debug-b434aa5ac2b88280a0d5.json
+build/.cmake/api/v1/reply/target-NightlyMemCheck-Debug-a59753b85f8648d529d3.json
+build/.cmake/api/v1/reply/target-NightlyMemoryCheck-Debug-3a5bab573d9f98ffd079.json
+build/.cmake/api/v1/reply/target-NightlyStart-Debug-465f1ce1dd186687a406.json
+build/.cmake/api/v1/reply/target-NightlySubmit-Debug-247ae491f4cfdb34c291.json
+build/.cmake/api/v1/reply/target-NightlyTest-Debug-6ead0486141ece4235a6.json
+build/.cmake/api/v1/reply/target-NightlyUpdate-Debug-cef942e81bd51f7c29c0.json
+build/.cmake/api/v1/reply/toolchains-v1-ca541aec8550a92c95f5.json
 .vscode/settings.json
