@@ -23,8 +23,5 @@ jobs:
         with:
           python-version: 3.11  # Replace with your desired Python version
 
-      - name: Install dependencies
-        run: pip install onedrive-api
-
       - name: Run Python script
         run: python upload.py
