@@ -16,5 +16,5 @@ jobs:
       - name: Upload file to OneDrive
         run: |
           curl -X PUT -T path/to/gh_A.7z \
-            -H "Authorization: Bearer $(curl -s -X POST -d "client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&grant_type=password&scope=Files.ReadWrite.All&username=$macxfadz@hotmail.com&password="JavaMaya@4785" https://login.microsoftonline.com/common/oauth2/v2.0/token | jq -r .access_token)" \
+            -u ${{ secrets.ONEDRIVE_USERNAME }}:${{ secrets.ONEDRIVE_PASSWORD }} \
             "https://graph.microsoft.com/v1.0/me/drive/root:/repo/gh_A.7z:/content"
