@@ -16,5 +16,5 @@ jobs:
       - name: Upload file to OneDrive
         run: |
           curl -X PUT -T gh_A.7z \
-            -u ${{ secrets.ONEDRIVE_USERNAME }}:${{ secrets.ONEDRIVE_PASSWORD }} \
+            -u ${{ secrets.ONEDRIVE_USERNAME }}:${{ secrets.ONEDRIVE_PD }} \
             "https://graph.microsoft.com/v1.0/me/drive/root:/repo/gh_A.7z:/content"
