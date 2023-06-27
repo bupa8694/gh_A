@@ -12,9 +12,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
+    
       - name: Upload file to OneDrive
         run: |
           curl -X PUT -T gh_A.7z \
             -u ${{ secrets.ONEDRIVE_USERNAME }}:${{ secrets.ONEDRIVE_PD }} \
             "https://graph.microsoft.com/v1.0/me/drive/root:/repo/gh_A.7z:/content"
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11  # Replace with your desired Python version
+
+      - name: Install dependencies
+        run: pip install onedrive-api
+
+      - name: Run Python script
+        run: python upload.py
