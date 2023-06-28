@@ -28,7 +28,7 @@ jobs:
           path: artifacts/
 
       - name: Install p7zip
-        run: sudo apt-get install p7zip-full -y
+        run: sudo apt-get install p7zip -y
 
       - name: Extract 7z file
         run: |
