@@ -29,16 +29,3 @@ jobs:
 
       - name: Install p7zip
         run: sudo apt-get install p7zip -y
-
-      - name: Extract 7z file
-        run: |
-          7z x artifacts/gh_A.7z -o extracted_files
-
-      - name: Check file existence
-        run: |
-          if [ -f extracted_files/main.cpp ]; then
-            echo "main.cpp exists"
-          else
-            echo "main.cpp does not exist"
-            exit 1
-          fi
