@@ -29,11 +29,11 @@ jobs:
 
       - name: Extract 7z file
         run: |
-          7z x artifacts/data/gh_A.7z -oextracted_files
+          7z x artifacts/gh_A/data/gh_A.7z -odata/extracted_files
 
       - name: Check file existence
         run: |
-          if [ -f extracted_files/data/main.cpp ]; then
+          if [ -f data/extracted_files/main.cpp ]; then
             echo "main.cpp exists"
           else
             echo "main.cpp does not exist"
