@@ -27,6 +27,9 @@ jobs:
           name: gh_A
           path: artifacts/
 
+      - name: Install p7zip
+        run: sudo apt-get install p7zip-full -y
+
       - name: Extract 7z file
         run: |
           7z x artifacts/gh_A/data/gh_A.7z -odata/extracted_files
