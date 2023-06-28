@@ -1,28 +1,41 @@
-name: OneDrive Upload
-
+name: Share 7z File Example
 on:
   push:
     branches:
       - main
 
 jobs:
-  upload:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v2
-    
-      - name: Upload file to OneDrive
-        run: |
-          curl -X PUT -T gh_A.7z \
-            -u ${{ secrets.ONEDRIVE_USERNAME }}:${{ secrets.ONEDRIVE_PD }} \
-            "https://graph.microsoft.com/v1.0/me/drive/root:/repo/gh_A.7z:/content"
-      - name: Set up Python
-        uses: actions/setup-python@v2
+
+      - name: Create artifact
+        uses: actions/upload-artifact@v2
         with:
-          python-version: 3.11  # Replace with your desired Python version
-      - name: Install dependencies
-        run: pip install requests
-      - name: Run Python script
-        run: python upload.py
+          name: gh_A
+          path: data/gh_A.7z
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: gh_A
+          path: artifacts/
+
+      - name: Extract 7z file
+        run: |
+          7z x artifacts/data/gh_A.7z -oextracted_files
+
+      - name: Check file existence
+        run: |
+          if [ -f extracted_files/data/main.cpp ]; then
+            echo "main.cpp exists"
+          else
+            echo "main.cpp does not exist"
+            exit 1
+          fi
