@@ -15,7 +15,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: gh_A
-          path: gh_A.7z
+          path: data/gh_A.7z
 
   deploy:
     needs: build
@@ -29,11 +29,11 @@ jobs:
 
       - name: Extract 7z file
         run: |
-          7z x artifacts/gh_A.7z -oextracted_files
+          7z x artifacts/data/gh_A.7z -oextracted_files
 
       - name: Check file existence
         run: |
-          if [ -f extracted_files/main.cpp ]; then
+          if [ -f extracted_files/data/main.cpp ]; then
             echo "main.cpp exists"
           else
             echo "main.cpp does not exist"
