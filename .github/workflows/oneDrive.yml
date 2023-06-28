@@ -26,7 +26,13 @@ jobs:
         with:
           name: gh_A
           path: artifacts/
+      - name: Install curl
+        run: sudo apt-get install curl -y
 
+      - name: Upload to OneDrive
+        run: |
+          curl -X PUT -T "artifacts/gh_A.7z" -u ${{ secrets.ONEDRIVE_USERNAME }}:${{ secrets.ONEDRIVE_PD }} "https://graph.microsoft.com/v1.0/me/drive/root:/gh_A.7z"
+      
       - name: Install p7zip
         run: sudo apt-get install p7zip -y
       
