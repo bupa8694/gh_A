@@ -32,7 +32,6 @@ jobs:
 
       - name: Extract 7z file
         run: |
-          #7z x artifacts/gh_A/data/gh_A.7z -odata/extracted_files
           7z x artifacts/gh_A.7z -o extracted_files
 
       - name: Check file existence
