@@ -32,4 +32,4 @@ jobs:
       
       - name: Extract 7z file
         run: |
-          7z x artifacts/gh_A.7z -o data/
+          7z x artifacts/gh_A.7z -odata/
