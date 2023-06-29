@@ -55,7 +55,7 @@ jobs:
           fi
           
   Analyze:
-    needs: build
+    needs: deploy
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -63,14 +63,15 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
+        
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2.4.2
+        uses: github/codeql-action/init@v2
         with:
-          languages: cpp
+         languages: cpp, python
 
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v2.4.2
+       # Here is where you build your code
+      - run: |
+         g++ -o main main.cpp
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2.4.2
+        uses: github/codeql-action/analyze@v2
