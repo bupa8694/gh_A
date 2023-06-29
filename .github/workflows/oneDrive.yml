@@ -3,7 +3,12 @@ on:
   push:
     branches:
       - main
-
+  pull_request:
+    types:
+      - opened
+      - synchronize
+    branches:
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -48,3 +53,23 @@ jobs:
             echo "main.cpp does not exist"
             exit 1
           fi
+          
+  Analyze:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: cpp
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v2
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
