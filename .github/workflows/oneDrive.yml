@@ -55,7 +55,7 @@ jobs:
           fi
           
   Analyze:
-    needs: build
+    needs: deploy
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
