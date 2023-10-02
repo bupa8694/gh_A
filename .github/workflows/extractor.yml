@@ -1,0 +1,25 @@
+name: Extractor
+
+on:
+  push:
+    branches:
+      - gh_A
+  pull_request:
+    branches:
+      - gh_A
+
+jobs:
+  extract:
+    runs-on: macos-latest
+
+    steps:
+      - name: Check if data.tar.xz exists
+        run: |
+          if [[ ! -f data.tar.xz ]]; then
+            echo "Error: data.tar.xz not found"
+            exit 1
+          fi
+
+      - name: Extract data.tar.xz
+        run: |
+          tar -xvf data.tar.xz
