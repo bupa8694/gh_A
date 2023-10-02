@@ -3,10 +3,10 @@ name: Extractor
 on:
   push:
     branches:
-      - gh_A
+      - main
   pull_request:
     branches:
-      - gh_A
+      - main
 
 jobs:
   extract:
