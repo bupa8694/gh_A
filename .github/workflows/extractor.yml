@@ -12,8 +12,14 @@ jobs:
     steps:
       - name: List Files in Root Directory
         run: |
+          echo "Contents of the root directory:"
           ls -l
 
+      - name: List All Files in Repository
+        run: |
+          echo "List of all files in the repository:"
+          find . -type f
+          
       - name: Check if main.cpp exists
         run: |
           if [[ -f main.cpp ]]; then
