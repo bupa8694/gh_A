@@ -22,7 +22,16 @@ jobs:
         run: |
           echo "List of all files in the repository:"
           find . -type f
-          
+
+      - name: Check if data.tar.xz exists
+        run: |
+          if [[ -f data.tar.xz ]]; then
+            echo "data.tar.xz found, extracting..."
+            tar -xJf data.tar.xz
+          else
+            echo "data.tar.xz not found"
+          fi
+
       - name: Check if main.cpp exists
         run: |
           if [[ -f main.cpp ]]; then
