@@ -4,22 +4,30 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   extract:
     runs-on: macos-latest
 
     steps:
-      - name: Check if data.tar.xz exists
+      - name: Check if main.cpp exists
         run: |
-          if [[ ! -f data.tar.xz ]]; then
-            echo "Error: data.tar.xz not found"
+          if [[ -f main.cpp ]]; then
+            echo "main.cpp found"
+          else
+            echo "Error: main.cpp not found"
             exit 1
           fi
 
-      - name: Extract data.tar.xz
+      - name: Compress main.cpp to main.tar.xz
         run: |
-          tar -xvf data.tar.xz
+          tar -cJf main.tar.xz main.cpp
+
+      - name: Check if main.tar.xz exists
+        run: |
+          if [[ -f main.tar.xz ]]; then
+            echo "main.tar.xz created successfully"
+          else
+            echo "Error: main.tar.xz not created"
+            exit 1
+          fi
