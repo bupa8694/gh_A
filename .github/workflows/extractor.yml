@@ -10,6 +10,10 @@ jobs:
     runs-on: macos-latest
 
     steps:
+      - name: List Files in Root Directory
+        run: |
+          ls -l
+
       - name: Check if main.cpp exists
         run: |
           if [[ -f main.cpp ]]; then
