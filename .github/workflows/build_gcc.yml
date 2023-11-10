@@ -29,7 +29,7 @@ jobs:
         run: |
           mkdir gcc_9.4.0_build
           cd gcc_9.4.0_build
-          ../gcc-9.4.0/configure --prefix=$(pwd)/gcc_9.4.0 --target=x86_64-linux-gnu --enable-languages=c,c++ --disable-multilib
+          ../gcc-9.4.0/configure --prefix=$(pwd)/gcc_9.4.0 --enable-languages=c,c++
           make -j$(nproc)
           make install
 
