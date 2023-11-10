@@ -1,0 +1,36 @@
+name: Build GCC 9.4.0
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build-gcc:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Update system packages
+        run: sudo apt update && sudo apt upgrade -y
+
+      - name: Install build dependencies
+        run: sudo apt install -y build-essential bison flex gdb libmpc-dev libmpfr-dev libz3-dev
+
+      - name: Download GCC source code
+        run: wget https://ftp.gnu.org/gnu/gcc/gcc-9.4.0/gcc-9.4.0.tar.xz
+
+      - name: Extract GCC source code
+        run: tar xvf gcc-9.4.0.tar.xz
+
+      - name: Build GCC
+        run: cd gcc-9.4.0 && ./configure && make -j $(nproc) && sudo make install
+
+      - name: Compress GCC binary folder
+        run: tar cvJf gcc-9.4.0.tar.xz /usr/local/gcc-9.4.0
+
+      - name: Save GCC binary folder as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: gcc-9.4.0.tar.xz
+          path: gcc-9.4.0.tar.xz
