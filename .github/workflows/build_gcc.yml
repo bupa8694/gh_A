@@ -39,7 +39,7 @@ jobs:
           ./gcc --version
 
       - name: Compress GCC binary folder
-        run: tar cvJf gcc-9.4.0.tar.xz -C gcc_9.4.0_build/gcc_9.4.0 bin lib
+        run: tar cvJf gcc-9.4.0.tar.xz -C gcc_9.4.0_build .
 
       - name: Save GCC binary folder as artifact
         uses: actions/upload-artifact@v3
