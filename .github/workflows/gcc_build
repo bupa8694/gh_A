@@ -1,36 +1,54 @@
-name: Build GCC 9.4.0
+name: Build and Package GCC
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - main
 
 jobs:
-  build-gcc:
+  build:
     runs-on: ubuntu-20.04
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
       - name: Update system packages
         run: sudo apt update && sudo apt upgrade -y
 
-      - name: Install build dependencies
-        run: sudo apt install -y build-essential bison flex gdb libmpc-dev libmpfr-dev libz3-dev
+      - name: Install dependencies
+        run: sudo apt-get install -y build-essential libisl-dev wget
 
-      - name: Download GCC source code
-        run: wget https://ftp.gnu.org/gnu/gcc/gcc-9.4.0/gcc-9.4.0.tar.xz
+      - name: Download and extract GCC 9.4.0 source
+        run: |
+          wget https://ftp.gnu.org/gnu/gcc/gcc-9.4.0/gcc-9.4.0.tar.gz
+          tar -xf gcc-9.4.0.tar.gz
+          mv gcc-9.4.0 gcc-source
 
-      - name: Extract GCC source code
-        run: tar xvf gcc-9.4.0.tar.xz
+      - name: Configure and build GCC
+        run: |
+          mkdir gcc-build
+          cd gcc-build
+          ../gcc-source/configure --prefix=/usr/local
+          make -j$(nproc)
+          sudo make install
 
-      - name: Build GCC
-        run: cd gcc-9.4.0 && ./configure && make -j $(nproc) && sudo make install
+      - name: Verify GCC build
+        run: |
+          cd /usr/local/gcc-9.4.0/bin
+          ./gcc --version
 
       - name: Compress GCC binary folder
-        run: tar cvJf gcc-9.4.0.tar.xz /usr/local/gcc-9.4.0
+        run: tar -caf gcc-binary.tar.xz -C /usr/local .
 
-      - name: Save GCC binary folder as artifact
-        uses: actions/upload-artifact@v3
+      - name: Publish GCC binary to GitHub Packages
+        uses: actions/upload-package@v3
         with:
-          name: gcc-9.4.0.tar.xz
-          path: gcc-9.4.0.tar.xz
+          package-path: gcc-binary.tar.xz
+          package-name: gcc-binary
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Clean up temporary build directories
+        run: |
+          rm -rf gcc-build
+          rm -rf gcc-source
