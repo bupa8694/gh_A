@@ -39,8 +39,13 @@ jobs:
           cd gcc_9.4.0_build/gcc_9.4.0/bin
           ./gcc --version
 
+      - name: List files in directory
+        run:  |
+          ls -al gcc_9.4.0_build
+          ls -al gcc_9.4.0_build/gcc_9.4.0
+
       - name: Compress GCC binary folder
-        run: tar cvJf gcc_9.4.0.tar.xz -C gcc_9.4.0_build/gcc_9.4.0
+        run: tar cvJf gcc_9.4.0.tar.xz -C gcc_9.4.0_build .
 
       - name: Save GCC binary folder as artifact
         uses: actions/upload-artifact@v3
