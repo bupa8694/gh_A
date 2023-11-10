@@ -2,7 +2,8 @@ name: Build GCC 9.4.0
 
 on:
   push:
-    branches: [master]
+    branches:
+      - main
 
 jobs:
   build-gcc:
