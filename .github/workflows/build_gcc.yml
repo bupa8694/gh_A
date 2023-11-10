@@ -1,4 +1,4 @@
-name: Build GCC 9.4.0
+name: Build GCC Libraries for x64
 
 on:
   push:
@@ -25,27 +25,27 @@ jobs:
       - name: Extract GCC source code
         run: tar xvf gcc-9.4.0.tar.xz
 
-      - name: Build GCC
+      - name: Build GCC libraries for x64 (C/C++ only)
         run: |
-          mkdir gcc_9.4.0
-          cd gcc_9.4.0
-          ../gcc-9.4.0/configure --prefix=$(pwd)
+          mkdir gcc_9.4.0_build
+          cd gcc_9.4.0_build
+          ../gcc-9.4.0/configure --prefix=$(pwd)/gcc_9.4.0 --target=x86_64-linux-gnu --enable-languages=c,c++
           make -j$(nproc)
           make install
 
       - name: Verify GCC build
         run: |
-          cd gcc_9.4.0/bin
+          cd gcc_9.4.0_build/gcc_9.4.0/bin
           ./gcc --version
 
       - name: Compress GCC binary folder
-        run: tar cvJf gcc-9.4.0.tar.xz -C gcc_9.4.0/ bin lib
+        run: tar cvJf gcc-9.4.0.tar.xz -C gcc_9.4.0_build/gcc_9.4.0 bin lib
 
       - name: Save GCC binary folder as artifact
         uses: actions/upload-artifact@v3
         with:
           name: gcc-9.4.0.tar.xz
-          path: gcc-9.4.0.tar.xz
+          path: gcc_9.4.0_build/gcc_9.4.0.tar.xz
 
       - name: Clean up
-        run: rm -rf gcc-9.4.0* && sudo apt-get autoremove --purge -y
+        run: rm -rf gcc_9.4.0_build
