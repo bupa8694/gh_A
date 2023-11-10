@@ -29,6 +29,7 @@ jobs:
         run: |
           mkdir gcc_9.4.0_build
           cd gcc_9.4.0_build
+          mkdir gcc_9.4.0
           ../gcc-9.4.0/configure --prefix=$(pwd)/gcc_9.4.0 --enable-languages=c,c++ --disable-multilib
           make -j$(nproc)
           make install
@@ -39,12 +40,12 @@ jobs:
           ./gcc --version
 
       - name: Compress GCC binary folder
-        run: tar cvJf gcc-9.4.0.tar.xz -C gcc_9.4.0_build .
+        run: tar cvJf gcc_9.4.0.tar.xz -C gcc_9.4.0_build/gcc_9.4.0
 
       - name: Save GCC binary folder as artifact
         uses: actions/upload-artifact@v3
         with:
-          name: gcc-9.4.0.tar.xz
+          name: gcc_9.4.0.tar.xz
           path: gcc_9.4.0_build/gcc_9.4.0.tar.xz
 
       - name: Clean up
