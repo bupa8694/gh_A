@@ -43,10 +43,9 @@ jobs:
         run:  |
           ls -al gcc_9.4.0_build/gcc_9.4.0
 
-      - name: Compress GCC binary folder
+      - name: Compress GCC binary folders
         run: |
-          cd  gcc_9.4.0_build
-          tar cvJf gcc_9.4.0.tar.xz -C gcc_9.4.0
+          tar cvJf gcc_9.4.0_build/gcc_9.4.0.tar.xz -C gcc_9.4.0_build/gcc_9.4.0 bin include lib lib64 libexec share
 
       - name: Save GCC binary folder as artifact
         uses: actions/upload-artifact@v3
