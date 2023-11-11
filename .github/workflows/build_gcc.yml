@@ -68,24 +68,24 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: gcc_9.4.0.tar.xz
-          path: gcc_9.4.0_build
+          path: gcc_9.4.0
 
       - name: Decompress GCC binary artifact
-        run: tar xvf gcc_9.4.0_build/gcc_9.4.0.tar.xz -C gcc_9.4.0_build/
+        run: tar xvf gcc_9.4.0/gcc_9.4.0.tar.xz -C gcc_9.4.0
 
       - name: Compile and run sample C program
         run: |
-          cd gcc_9.4.0_build/gcc_9.4.0
+          cd gcc_9.4.0
           echo "#include <stdio.h> int main() { printf(\"Hello, GCC C!\\n\"); return 0; }" > test.c
           ./bin/gcc test.c -o test
           ./test
 
       - name: Compile and run sample C++ program
         run: |
-          cd gcc_9.4.0_build/gcc_9.4.0
+          cd gcc_9.4.0
           echo "#include <iostream> int main() { std::cout << \"Hello, GCC C++!\\n\"; return 0; }" > test.cpp
           ./bin/g++ test.cpp -o test_cpp
           ./test_cpp
       - name: Clean up GCC build directory
-        run: rm -rf gcc_9.4.0_build
+        run: rm -rf gcc_9.4.0
   
