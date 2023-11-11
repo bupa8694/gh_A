@@ -55,3 +55,37 @@ jobs:
 
       - name: Clean up
         run: rm -rf gcc_9.4.0_build
+        
+  test-gcc:
+    needs: build-gcc
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download GCC binary artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: gcc_9.4.0.tar.xz
+          path: gcc_9.4.0_build
+
+      - name: Decompress GCC binary artifact
+        run: tar xvf gcc_9.4.0_build/gcc_9.4.0.tar.xz -C gcc_9.4.0_build/
+
+      - name: Compile and run sample C program
+        run: |
+          cd gcc_9.4.0_build/gcc_9.4.0
+          echo "#include <stdio.h> int main() { printf(\"Hello, GCC C!\\n\"); return 0; }" > test.c
+          ./bin/gcc test.c -o test
+          ./test
+
+      - name: Compile and run sample C++ program
+        run: |
+          cd gcc_9.4.0_build/gcc_9.4.0
+          echo "#include <iostream> int main() { std::cout << \"Hello, GCC C++!\\n\"; return 0; }" > test.cpp
+          ./bin/g++ test.cpp -o test_cpp
+          ./test_cpp
+      - name: Clean up GCC build directory
+        run: rm -rf gcc_9.4.0_build
+  
