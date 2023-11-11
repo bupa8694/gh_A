@@ -76,16 +76,25 @@ jobs:
       - name: Compile and run sample C program
         run: |
           cd gcc_9.4.0
-          echo "#include <stdio.h> int main() { printf(\"Hello, GCC C!\\n\"); return 0; }" > test.c
+          echo '#include <stdio.h>
+          int main() {
+            printf("Hello, GCC C!\n");
+            return 0;
+          }' > test.c
           ./bin/gcc test.c -o test
           ./test
 
       - name: Compile and run sample C++ program
         run: |
           cd gcc_9.4.0
-          echo "#include <iostream> int main() { std::cout << \"Hello, GCC C++!\\n\"; return 0; }" > test.cpp
+          echo '#include <iostream>
+          int main() {
+            std::cout << "Hello, GCC C++!\n";
+            return 0;
+          }' > test.cpp
           ./bin/g++ test.cpp -o test_cpp
           ./test_cpp
+
       - name: Clean up GCC build directory
         run: rm -rf gcc_9.4.0
   
