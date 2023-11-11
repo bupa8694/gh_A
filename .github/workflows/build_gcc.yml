@@ -17,7 +17,7 @@ jobs:
         run: sudo apt update && sudo apt upgrade -y
 
       - name: Install build dependencies
-        run: sudo apt install -y build-essential bison flex libisl-dev wget gdb libmpc-dev libmpfr-dev libz3-dev
+        run: sudo apt install -y build-essential bison flex libisl-dev wget gdb libmpc-dev libmpfr-dev libz3-dev ccache
 
       - name: Download GCC source code
         run: wget https://ftp.gnu.org/gnu/gcc/gcc-9.4.0/gcc-9.4.0.tar.xz
@@ -30,7 +30,7 @@ jobs:
           mkdir gcc_9.4.0_build
           cd gcc_9.4.0_build
           mkdir gcc_9.4.0
-          ../gcc-9.4.0/configure --prefix=$(pwd)/gcc_9.4.0 --enable-languages=c,c++ --disable-multilib
+          ../gcc-9.4.0/configure --prefix=$(pwd)/gcc_9.4.0 --enable-languages=c,c++ --disable-multilib --with-system-zlib --with-arch=native --disable-docs
           make -j$(nproc)
           make install
 
@@ -58,7 +58,7 @@ jobs:
         
   test-gcc:
     needs: build-gcc
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
       - name: Checkout repository
